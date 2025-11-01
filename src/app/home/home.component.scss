@@ -1,0 +1,38 @@
+.home-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #fff9e6 0%, #ffe5cc 100%);
+}
+
+.home-content {
+  text-align: center;
+
+  h1 {
+    font-size: 48px;
+    color: #333;
+    margin-bottom: 40px;
+    font-weight: 600;
+  }
+}
+
+.cost-calculator-btn {
+  padding: 15px 40px;
+  font-size: 18px;
+  font-weight: 600;
+  background: #ff9800;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    background: #e68900;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  }
+}
+

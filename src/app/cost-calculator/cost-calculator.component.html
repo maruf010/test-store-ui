@@ -1,0 +1,181 @@
+<div class="cost-calculator-container">
+  <div class="container">
+    <div class="header">
+      <h1>Home Construction Cost Calculator – Total Cost and Phase wise break down of the Home Building Project</h1>
+    </div>
+
+    <div class="calculator-section">
+      <div class="form-container">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="division">Select State:</label>
+            <select id="division" [(ngModel)]="selectedDivision" (change)="onDivisionChange()" class="form-control">
+              <option value="" disabled>Select State</option>
+              <option *ngFor="let division of divisions" [value]="division.name">
+                {{ division.name }}
+              </option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="district">Select City:</label>
+            <select id="district" [(ngModel)]="selectedDistrict" class="form-control" [disabled]="!selectedDivision">
+              <option value="" disabled>Select City</option>
+              <option *ngFor="let district of districts" [value]="district">
+                {{ district }}
+              </option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="area">Area:</label>
+            <div class="area-input-group">
+              <input type="number" id="area" [(ngModel)]="area" class="form-control area-input" placeholder="5000">
+              <div class="radio-group">
+                <label class="radio-label">
+                  <input type="radio" name="areaUnit" value="sqft" [(ngModel)]="areaUnit" checked>
+                  <span>Sq. Feet</span>
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="areaUnit" value="sqm" [(ngModel)]="areaUnit">
+                  <span>Sq. Meter</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <button class="next-btn" (click)="onNext()">
+            Next <span class="arrow">→</span>
+          </button>
+          <button class="reset-btn" (click)="onReset()">
+            Reset
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results Section -->
+    <div class="chart-wrapper" *ngIf="showResults">
+  <h2>Total Estimated Cost (BDT)</h2>
+
+  <div
+    class="donut-chart"
+    [ngStyle]="{ background: 'conic-gradient(' + conicGradient + ')' }"
+    (mousemove)="onMouseMove($event)"
+  >
+    <div class="center-circle"></div>
+
+    <!-- Transparent interactive zones for hover -->
+    <ng-container *ngFor="let item of costItems; let i = index">
+      <div
+        class="hover-slice"
+        [ngStyle]="getSliceStyle(i)"
+        (mousemove)="showTooltip($event, item)"
+        (mouseleave)="hideTooltip()"
+        (click)="showTooltip($event, item)"
+      ></div>
+    </ng-container>
+
+    <!-- Tooltip -->
+    <div
+      class="tooltip"
+      *ngIf="tooltip.visible"
+      [ngStyle]="{ top: tooltip.y + 'px', left: tooltip.x + 'px' }"
+      [innerHTML]="tooltip.text"
+    ></div>
+  </div>
+
+  <ul class="chart-labels">
+    <li *ngFor="let item of costItems" 
+        class="label-item"
+        [style.background-color]="item.color"
+        [style.color]="getContrastColor(item.color)">
+      {{ item.name }} – {{ item.percent }}%
+    </li>
+  </ul>
+</div>
+
+
+
+      <!-- Timeline Section -->
+      <div class="result-card" *ngIf="showResults">
+        <h2 class="section-title">Timeline Tracking: Cost Per Phase (BDT %)</h2>
+        <div class="timeline-info">
+          <p class="duration-info">Overall duration in days: <strong>{{ totalDays }} Days</strong></p>
+        </div>
+        <div class="timeline-chart">
+          <!-- X-axis labels -->
+          <div class="timeline-axis-labels">
+            <span *ngFor="let tick of getTimelineTicks(); let i = index" 
+                  class="axis-tick"
+                  [style.left.%]="(tick / getMaxTimelineDays()) * 100">
+              {{ tick }}
+            </span>
+          </div>
+          <!-- Timeline bars -->
+          <div class="timeline-bars-container">
+            <div *ngFor="let phase of phases" class="timeline-bar-wrapper">
+              <div class="timeline-label">{{ phase.name }}</div>
+              <div class="timeline-bar-container">
+                <div class="timeline-bar" 
+                     [style.left.%]="(phase.startDay! / getMaxTimelineDays()) * 100"
+                     [style.width.%]="(phase.days / getMaxTimelineDays()) * 100">
+                </div>
+                <div class="timeline-bar-label" 
+                     [style.left.%]="((phase.startDay! + phase.days) / getMaxTimelineDays()) * 100">
+                  {{ phase.days.toString().padStart(2, '0') }} Days | BDT {{ phase.cost.toLocaleString() }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resource Allocation Table -->
+      <div class="result-card" *ngIf="showResults">
+        <h2 class="section-title">Cost by Resource Allocation</h2>
+        <div class="table-container">
+          <table class="resource-table">
+            <thead>
+              <tr>
+                <th>Resource</th>
+                <th>Quantity</th>
+                <th>Quality</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let resource of resources">
+                <td>
+                  <span class="resource-icon">{{ resource.icon }}</span>
+                  {{ resource.name }}
+                </td>
+                <td class="quantity-cell"> {{ resource.quantity }}</td>
+                <td>
+                  <div class="quality-options">
+                    <label *ngFor="let option of resource.qualityOptions" class="quality-radio-label">
+                      <input type="radio" [name]="'quality_' + resource.name" [value]="option.value"
+                        [(ngModel)]="resource.selectedQuality" (ngModelChange)="onQualityChange(resource)">
+                      <span class="radio-custom" [class.checked]="resource.selectedQuality === option.value"></span>
+                      <span class="quality-label-text">{{ option.label }}</span>
+                    </label>
+                  </div>
+                </td>
+                <td class="amount-cell">BDT {{ resource.amount.toLocaleString() }}</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="3" class="total-label">Total Amount : </td>
+                <td class="total-amount">BDT {{ getTotalResourceAmount().toLocaleString() }}</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <div class="action-buttons">
+          <button class="action-btn print-btn" (click)="onPrint()">Print Final Estimate</button>
+          <button class="action-btn share-btn" (click)="onShare()">Share Final Estimate</button>
+        </div>
+      </div>
+  </div>
+</div>
