@@ -1,0 +1,291 @@
+.card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+margin: auto;  
+  &:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+  }
+}
+
+.card-image {
+  position: relative;
+  overflow: hidden;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  
+  .bookmark-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 8px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      background: white;
+      transform: scale(1.1);
+    }
+    
+    svg {
+      color: #64748b;
+    }
+  }
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+  gap: 12px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.card-category {
+  color: #64748b;
+  font-size: 14px;
+  margin: 0 0 16px 0;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #fef3c7;
+  padding: 4px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+  
+  .star {
+    font-size: 14px;
+  }
+  
+  .rating-value {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1e293b;
+  }
+}
+
+.card-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #64748b;
+  font-size: 14px;
+  
+  svg {
+    flex-shrink: 0;
+    color: #94a3b8;
+  }
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.price-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.price-label {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.price {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1e293b;
+  
+  .price-unit {
+    font-size: 16px;
+    font-weight: 500;
+    color: #64748b;
+  }
+}
+
+.booking-btn {
+  background: #ff6b35;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  
+  &:hover {
+    background: #ff5722;
+    transform: scale(1.05);
+  }
+  
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// Type 1: Vertical Card (Default)
+.card-type1 {
+  max-width: 360px;
+  
+  .card-image {
+    height: 280px;
+  }
+}
+
+// Type 2: Horizontal Card with Image on Right
+.card-type2 {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  // display: flex;
+  // flex-direction: row-reverse;
+  max-width: 100%;
+  
+  .card-image {
+    width: 280px;
+    min-width: 280px;
+    height: auto;
+  }
+  
+  .card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .card-header {
+    flex-direction: row;
+    align-items: flex-start;
+    
+    > div:first-child {
+      flex: 1;
+    }
+  }
+  
+  .card-details {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+}
+
+// Type 3: Compact Horizontal Card
+.card-type3 {
+  display: flex;
+  max-width: 100%;
+  
+  .card-image {
+    width: 180px;
+    min-width: 180px;
+    height: auto;
+    
+    .bookmark-btn {
+      width: 32px;
+      height: 32px;
+      top: 8px;
+      right: 8px;
+    }
+  }
+  
+  .card-content {
+    flex: 1;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .card-title {
+    font-size: 16px;
+  }
+  
+  .card-category {
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+  
+  .card-details {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  
+  .detail-item {
+    font-size: 13px;
+  }
+  
+  .price {
+    font-size: 20px;
+    
+    .price-unit {
+      font-size: 14px;
+    }
+  }
+  
+  .booking-btn {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .card-type2, .card-type3 {
+    flex-direction: column;
+    
+    .card-image {
+      width: 100%;
+      height: 240px;
+    }
+    
+    .card-details {
+      flex-direction: column;
+    }
+  }
+}

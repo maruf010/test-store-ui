@@ -95,7 +95,7 @@
 
 .chart-wrapper {
   text-align: center;
-  background-color: #fffde7;
+  background-color: #fffee5;
   padding: 40px;
   border-radius: 12px;
   // box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -104,17 +104,38 @@
     font-weight: 700;
     color: #333;
     margin-bottom: 30px;
+    display: block;
   }
 }
 
-.donut-chart {
+.chart-container-with-labels {
   position: relative;
+  width: 600px;
+  height: 500px;
+  margin: 0 auto;
+}
+
+.chart-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.donut-chart {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 320px;
   height: 320px;
-  margin: 0 auto 25px;
   border-radius: 50%;
   transition: background 0.3s ease;
   cursor: pointer;
+  z-index: 5;
 }
 
 .center-circle {
@@ -123,9 +144,80 @@
   left: 50%;
   width: 150px;
   height: 150px;
-  background-color: #fffde7;
+  background-color: #fffee5;
   border-radius: 50%;
   transform: translate(-50%, -50%);
+}
+
+.chart-label {
+  position: absolute;
+  font-size: 12px;
+  color: #000;
+  font-weight: 400;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.chart-label-top-left {
+  top: 75px;
+  left: 30px;
+}
+
+.chart-label-top {
+  top: 15px;
+  right: 85px;
+}
+
+.chart-label-top-right {
+  top: 75px;
+  right: 30px;
+}
+
+.chart-label-right {
+  top: 165px;
+  right: 10px;
+}
+
+.chart-label-bottom-right {
+  bottom: 125px;
+  right: 10px;
+}
+
+.chart-label-bottom {
+  bottom: 55px;
+  right: 85px;
+}
+
+.chart-label-bottom-center {
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.chart-label-bottom-left {
+  bottom: 55px;
+  left: 50px;
+}
+
+.chart-label-left {
+  top: 165px;
+  left: 10px;
+}
+
+.chart-label-left-top {
+  top: 75px;
+  left: 10px;
+}
+
+.chart-watermark {
+  position: absolute;
+  bottom: 10px;
+  left: 15px;
+  font-size: 10px;
+  color: #999;
+  font-weight: 400;
+  pointer-events: none;
 }
 
 /* Invisible interactive sectors for hover detection */
@@ -138,10 +230,10 @@
   transform-origin: center;
   pointer-events: auto;
   cursor: pointer;
+  z-index: 10;
   
   &:hover {
-    opacity: 0.1;
-    background: rgba(255, 255, 255, 0.3);
+    filter: brightness(1.1);
   }
 }
 
@@ -179,33 +271,7 @@
 }
 
 .chart-labels {
-  list-style: none;
-  padding: 0;
-  margin-top: 25px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px 25px;
-  max-width: 520px;
-  margin-left: auto;
-  margin-right: auto;
-
-  li {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
-    font-weight: 600;
-    padding: 10px 16px;
-    border-radius: 25px;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    
-    &:hover {
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-    }
-  }
+  display: none;
 }
 
 
@@ -342,6 +408,7 @@
   justify-content: center;
   flex-wrap: wrap;
   padding: 20px;
+  background-color: white;
 }
 
 .pie-chart-wrapper {
@@ -425,9 +492,11 @@
 
 .timeline-chart {
   position: relative;
-  padding: 12px 0 20px 0;
+  padding: 12px 10px 20px 10px;
   background-color: #fffee5;
   border-radius: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .timeline-axis-labels {
@@ -438,6 +507,7 @@
   border-bottom: 2px solid #ddd;
   position: relative;
   min-height: 16px;
+  min-width: 600px;
 
   .axis-tick {
     font-size: 10px;
@@ -451,14 +521,14 @@
 .timeline-bars-container {
   position: relative;
   min-height: 240px;
-  // padding-left: 145px;
+  min-width: 600px;
 }
 
 .timeline-bar-wrapper {
   display: flex;
   align-items: center;
-  margin-bottom: 4px;
-  height: 20px;
+  margin-bottom: 6px;
+  min-height: 22px;
   position: relative;
 }
 
@@ -469,35 +539,34 @@
   font-size: 10px;
   color: #333;
   font-weight: 500;
-  padding-right: 6px;
+  padding-right: 8px;
   text-align: right;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 1.2;
+  font-size: 11px;
 }
 
 .timeline-bar-container {
   position: relative;
   flex: 1;
-  height: 20px;
+  height: 28px;
   background-color: transparent;
-  margin-left: 5px;
+  margin-left: 148px;
 }
 
 .timeline-bar {
   position: absolute;
   top: 0;
   height: 100%;
-  background-color: #fff9e6;
+  background-color: #fcf8b0;
   border-radius: 2px;
-  border: 1px solid #ffe5cc;
   transition: all 0.3s ease;
   min-width: 2px;
   
   &:hover {
-    background-color: #fff3cd;
-    border-color: #ffd699;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fdf918;
   }
 }
 
@@ -747,13 +816,46 @@
     flex-direction: column;
   }
 
+  .timeline-chart {
+    padding: 12px 5px 20px 5px;
+  }
+
+  .timeline-axis-labels {
+    padding: 0 0 6px 105px;
+    min-width: 500px;
+
+    .axis-tick {
+      font-size: 9px;
+    }
+  }
+
+  .timeline-bars-container {
+    min-width: 500px;
+    min-height: 240px;
+  }
+
+  .timeline-bar-wrapper {
+    margin-bottom: 12px;
+    min-height: 24px;
+  }
+
   .timeline-label {
-    min-width: 150px;
-    font-size: 12px;
+    width: 100px;
+    font-size: 9px;
+    line-height: 1.3;
+  }
+
+  .timeline-bar-container {
+    margin-left: 108px;
+  }
+
+  .timeline-bar-label {
+    font-size: 9px;
+    padding: 1px 3px;
   }
 
   .timeline-bar-text {
-    font-size: 10px;
+    font-size: 9px;
   }
 
   .action-buttons {
@@ -803,9 +905,58 @@
   //   padding: 20px 15px;
   // }
 
+  .chart-container-with-labels {
+    width: 100%;
+    height: 450px;
+  }
+
   .donut-chart {
     width: 280px;
     height: 280px;
+  }
+
+  .chart-label {
+    font-size: 11px;
+  }
+
+  .chart-label-top-left {
+    top: 50px;
+    left: 20px;
+  }
+
+  .chart-label-top-right {
+    top: 50px;
+    right: 20px;
+  }
+
+  .chart-label-right {
+    top: 120px;
+    right: 5px;
+  }
+
+  .chart-label-bottom-right {
+    bottom: 90px;
+    right: 5px;
+  }
+
+  .chart-label-bottom {
+    bottom: 40px;
+    right: 60px;
+  }
+
+  .chart-label-bottom-left {
+    bottom: 40px;
+    left: 40px;
+  }
+
+  .chart-label-left {
+    top: 160px;
+    left: 5px;
+  }
+
+  .chart-label-left-top {
+    top: 80px;
+    left: 20px;
   }
 }
 
@@ -817,6 +968,11 @@
     }
   }
 
+  .chart-container-with-labels {
+    width: 100%;
+    height: 400px;
+  }
+
   .donut-chart {
     width: 240px;
     height: 240px;
@@ -825,6 +981,96 @@
   .center-circle {
     width: 120px;
     height: 120px;
+  }
+
+  .chart-label {
+    font-size: 10px;
+  }
+
+  .chart-label-top-left {
+    top: 40px;
+    left: 10px;
+  }
+
+  .chart-label-top-right {
+    top: 40px;
+    right: 10px;
+  }
+
+  .chart-label-right {
+    top: 100px;
+    right: 5px;
+  }
+
+  .chart-label-bottom-right {
+    bottom: 80px;
+    right: 5px;
+  }
+
+  .chart-label-bottom {
+    bottom: 30px;
+    right: 50px;
+  }
+
+  .chart-label-bottom-left {
+    bottom: 30px;
+    left: 30px;
+  }
+
+  .chart-label-left {
+    top: 140px;
+    left: 5px;
+  }
+
+  .chart-label-left-top {
+    top: 70px;
+    left: 10px;
+  }
+
+  .timeline-chart {
+    padding: 10px 3px 15px 3px;
+  }
+
+  .timeline-axis-labels {
+    padding: 0 0 6px 85px;
+    min-width: 400px;
+
+    .axis-tick {
+      font-size: 8px;
+    }
+  }
+
+  .timeline-bars-container {
+    min-width: 400px;
+    min-height: 220px;
+  }
+
+  .timeline-bar-wrapper {
+    margin-bottom: 10px;
+    min-height: 26px;
+  }
+
+  .timeline-label {
+    width: 80px;
+    font-size: 8px;
+    line-height: 1.4;
+  }
+
+  .timeline-bar-container {
+    margin-left: 88px;
+  }
+
+  .timeline-bar-label {
+    font-size: 8px;
+    padding: 1px 2px;
+  }
+
+  .duration-info {
+    font-size: 13px;
+
+    strong {
+      font-size: 16px;
+    }
   }
 }
 
@@ -837,6 +1083,38 @@
       font-size: 12px;
       padding: 9px 14px;
     }
+  }
+
+  .timeline-chart {
+    padding: 12px 8px 20px 8px;
+  }
+
+  .timeline-axis-labels {
+    padding: 0 0 6px 125px;
+    min-width: 550px;
+  }
+
+  .timeline-bars-container {
+    min-width: 550px;
+  }
+
+  .timeline-bar-wrapper {
+    margin-bottom: 7px;
+    min-height: 23px;
+  }
+
+  .timeline-label {
+    width: 120px;
+    font-size: 12px;
+    line-height: 1.3;
+  }
+
+  .timeline-bar-container {
+    margin-left: 128px;
+  }
+
+  .timeline-bar-label {
+    font-size: 9px;
   }
 }
 

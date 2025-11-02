@@ -54,46 +54,89 @@
       </div>
     </div>
 
+
+
+    
     <!-- Results Section -->
     <div class="chart-wrapper" *ngIf="showResults">
-  <h2>Total Estimated Cost (BDT)</h2>
+  <h2>Total Estimated Cost (INR)</h2>
 
-  <div
-    class="donut-chart"
-    [ngStyle]="{ background: 'conic-gradient(' + conicGradient + ')' }"
-    (mousemove)="onMouseMove($event)"
-  >
-    <div class="center-circle"></div>
+  <div class="chart-container-with-labels">
+    <!-- SVG for connecting lines -->
+    <svg class="chart-lines" viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg">
+      <!-- Brickwork and Plastering - Pink - Top -->
+      <line x1="300" y1="165" x2="300" y2="15" stroke="#FFC0CB" stroke-width="1.5"/>
+      
+      <!-- Flooring & Tiling - Purple - Top Right -->
+      <line x1="380" y1="195" x2="480" y2="75" stroke="#800080" stroke-width="1.5"/>
+      
+      <!-- Electric Wiring - Orange - Right -->
+      <line x1="410" y1="250" x2="520" y2="165" stroke="#FFA500" stroke-width="1.5"/>
+      
+      <!-- Water Supply & Plumbing - Gray - Bottom Right -->
+      <line x1="390" y1="310" x2="520" y2="375" stroke="#808080" stroke-width="1.5"/>
+      
+      <!-- Door - Brown - Bottom -->
+      <line x1="350" y1="340" x2="420" y2="445" stroke="#A52A2A" stroke-width="1.5"/>
+      
+      <!-- Roof Slab - Red - Bottom Center -->
+      <line x1="300" y1="340" x2="300" y2="485" stroke="#FF0000" stroke-width="1.5"/>
+      
+      <!-- RCC Work - Blue - Bottom Left -->
+      <line x1="250" y1="340" x2="150" y2="445" stroke="#0000FF" stroke-width="1.5"/>
+      
+      <!-- Footing & Foundation - Black - Left -->
+      <line x1="190" y1="250" x2="80" y2="165" stroke="#000000" stroke-width="1.5"/>
+      
+      <!-- Excavation - Green - Left Top -->
+      <line x1="220" y1="195" x2="80" y2="75" stroke="#008000" stroke-width="1.5"/>
+      
+      <!-- Home Design & Approval - Yellow - Top Left -->
+      <line x1="260" y1="175" x2="120" y2="75" stroke="#FFFF00" stroke-width="1.5"/>
+    </svg>
 
-    <!-- Transparent interactive zones for hover -->
-    <ng-container *ngFor="let item of costItems; let i = index">
-      <div
-        class="hover-slice"
-        [ngStyle]="getSliceStyle(i)"
-        (mousemove)="showTooltip($event, item)"
-        (mouseleave)="hideTooltip()"
-        (click)="showTooltip($event, item)"
-      ></div>
-    </ng-container>
-
-    <!-- Tooltip -->
     <div
-      class="tooltip"
-      *ngIf="tooltip.visible"
-      [ngStyle]="{ top: tooltip.y + 'px', left: tooltip.x + 'px' }"
-      [innerHTML]="tooltip.text"
-    ></div>
-  </div>
+      class="donut-chart"
+      [ngStyle]="{ background: 'conic-gradient(' + conicGradient + ')' }"
+      (mousemove)="onMouseMove($event)"
+    >
+      <div class="center-circle"></div>
 
-  <ul class="chart-labels">
-    <li *ngFor="let item of costItems" 
-        class="label-item"
-        [style.background-color]="item.color"
-        [style.color]="getContrastColor(item.color)">
-      {{ item.name }} – {{ item.percent }}%
-    </li>
-  </ul>
-</div>
+      <!-- Transparent interactive zones for hover -->
+      <ng-container *ngFor="let item of costItems; let i = index">
+        <div
+          class="hover-slice"
+          [ngStyle]="getSliceStyle(i)"
+          (mousemove)="showTooltip($event, item)"
+          (mouseleave)="hideTooltip()"
+          (click)="showTooltip($event, item)"
+        ></div>
+      </ng-container>
+
+      <!-- Tooltip -->
+      <div
+        class="tooltip"
+        *ngIf="tooltip.visible"
+        [ngStyle]="{ top: tooltip.y + 'px', left: tooltip.x + 'px' }"
+        [innerHTML]="tooltip.text"
+      ></div>
+    </div>
+
+    <!-- Labels around the chart -->
+    <div class="chart-label chart-label-top-left">Home Design & Approval</div>
+    <div class="chart-label chart-label-top">Brickwork and Plastering</div>
+    <div class="chart-label chart-label-top-right">Flooring & Tiling</div>
+    <div class="chart-label chart-label-right">Electric Wiring</div>
+    <div class="chart-label chart-label-bottom-right">Water Supply & Plumbing</div>
+    <div class="chart-label chart-label-bottom">Door</div>
+    <div class="chart-label chart-label-bottom-center">Roof Slab</div>
+    <div class="chart-label chart-label-bottom-left">RCC Work - Columns & Slabs</div>
+    <div class="chart-label chart-label-left">Footing & Foundation</div>
+    <div class="chart-label chart-label-left-top">Excavation</div>
+    
+
+  </div>
+    </div>
 
 
 
@@ -104,14 +147,8 @@
           <p class="duration-info">Overall duration in days: <strong>{{ totalDays }} Days</strong></p>
         </div>
         <div class="timeline-chart">
-          <!-- X-axis labels -->
-          <div class="timeline-axis-labels">
-            <span *ngFor="let tick of getTimelineTicks(); let i = index" 
-                  class="axis-tick"
-                  [style.left.%]="(tick / getMaxTimelineDays()) * 100">
-              {{ tick }}
-            </span>
-          </div>
+          
+
           <!-- Timeline bars -->
           <div class="timeline-bars-container">
             <div *ngFor="let phase of phases" class="timeline-bar-wrapper">
@@ -128,6 +165,16 @@
               </div>
             </div>
           </div>
+
+          <!-- X-axis labels -->
+          <div class="timeline-axis-labels">
+            <span *ngFor="let tick of getTimelineTicks(); let i = index" 
+                  class="axis-tick"
+                  [style.left.%]="(tick / getMaxTimelineDays()) * 100">
+              {{ tick }}
+            </span>
+          </div>
+
         </div>
       </div>
 
@@ -174,7 +221,7 @@
         </div>
         <div class="action-buttons">
           <button class="action-btn print-btn" (click)="onPrint()">Print Final Estimate</button>
-          <button class="action-btn share-btn" (click)="onShare()">Share Final Estimate</button>
+          <!-- <button class="action-btn share-btn" (click)="onShare()">Share Final Estimate</button> -->
         </div>
       </div>
   </div>

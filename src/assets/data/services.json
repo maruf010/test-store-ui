@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1,
+    "title": "House Painting (Eco)",
+    "category": "Design . Maintenance",
+    "rating": 4.6,
+    "image": "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=500&h=400&fit=crop",
+    "joinedDate": "Apr 21, 2024",
+    "location": "London",
+    "schedule": "Sun-Fri  9:30 AM - 11 PM",
+    "price": 7,
+    "priceUnit": "H"
+  },
+  {
+    "id": 2,
+    "title": "Plumbing Services",
+    "category": "Repair . Maintenance",
+    "rating": 4.8,
+    "image": "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=500&h=400&fit=crop",
+    "joinedDate": "Mar 15, 2024",
+    "location": "Manchester",
+    "schedule": "Mon-Sat  8:00 AM - 6 PM",
+    "price": 12,
+    "priceUnit": "H"
+  },
+  {
+    "id": 3,
+    "title": "Electrical Repair",
+    "category": "Installation . Repair",
+    "rating": 4.7,
+    "image": "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=500&h=400&fit=crop",
+    "joinedDate": "May 10, 2024",
+    "location": "Birmingham",
+    "schedule": "Mon-Fri  9:00 AM - 5 PM",
+    "price": 15,
+    "priceUnit": "H"
+  },
+  {
+    "id": 4,
+    "title": "Garden Landscaping",
+    "category": "Design . Outdoor",
+    "rating": 4.9,
+    "image": "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=500&h=400&fit=crop",
+    "joinedDate": "Feb 28, 2024",
+    "location": "Leeds",
+    "schedule": "Tue-Sun  7:00 AM - 4 PM",
+    "price": 20,
+    "priceUnit": "H"
+  },
+  {
+    "id": 5,
+    "title": "Cleaning Services",
+    "category": "Home . Commercial",
+    "rating": 4.5,
+    "image": "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=500&h=400&fit=crop",
+    "joinedDate": "Jan 12, 2024",
+    "location": "Liverpool",
+    "schedule": "Daily  6:00 AM - 10 PM",
+    "price": 8,
+    "priceUnit": "H"
+  },
+  {
+    "id": 6,
+    "title": "Carpentry Work",
+    "category": "Furniture . Installation",
+    "rating": 4.6,
+    "image": "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=500&h=400&fit=crop",
+    "joinedDate": "Apr 05, 2024",
+    "location": "Bristol",
+    "schedule": "Mon-Sat  8:30 AM - 5:30 PM",
+    "price": 18,
+    "priceUnit": "H"
+  },
+  {
+    "id": 7,
+    "title": "HVAC Services",
+    "category": "Installation . Maintenance",
+    "rating": 4.8,
+    "image": "https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=500&h=400&fit=crop",
+    "joinedDate": "Mar 20, 2024",
+    "location": "Sheffield",
+    "schedule": "Mon-Fri  8:00 AM - 6 PM",
+    "price": 25,
+    "priceUnit": "H"
+  }
+]

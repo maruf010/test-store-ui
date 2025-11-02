@@ -81,18 +81,18 @@ export class CostCalculatorComponent implements AfterViewInit {
   
   costItems: Array<{name: string, color: string, percent: number}> = [];
   
-  // Color mapping for phases
+  // Color mapping for phases - matching reference image exactly
   private phaseColors: { [key: string]: string } = {
-    'Home Design & Approval': '#FFFF00',
-    'Excavation': '#008000',
-    'Footing & Foundation': '#000000',
-    'RCC Work - Columns & Slabs': '#0000FF',
-    'Roof Slab': '#FF0000',
-    'Brickwork and Plastering': '#FFC0CB',
-    'Flooring & Tiling': '#800080',
-    'Electric Wiring': '#FFA500',
-    'Water Supply & Plumbing': '#808080',
-    'Door': '#A52A2A'
+    'Brickwork and Plastering': '#FFC0CB',  // Pink
+    'Flooring & Tiling': '#800080',         // Purple
+    'Electric Wiring': '#FFA500',           // Orange
+    'Home Design & Approval': '#FFFF00',    // Yellow
+    'Excavation': '#008000',                // Green
+    'Footing & Foundation': '#000000',      // Black
+    'RCC Work - Columns & Slabs': '#0000FF', // Blue
+    'Roof Slab': '#FF0000',                 // Red
+    'Water Supply & Plumbing': '#808080',   // Gray
+    'Door': '#A52A2A'                       // Brown
   };
 
   tooltip = {
@@ -324,18 +324,18 @@ export class CostCalculatorComponent implements AfterViewInit {
     
     const baseCost = areaInSqft * costPerSqft;
 
-    // Define phases with percentages
+    // Define phases with percentages - ordered clockwise from top matching reference
     const phasePercentages = [
-      { name: 'Home Design & Approval', percent: 3.5, days: 46, color: '#FFE5CC' },
-      { name: 'Excavation', percent: 1.8, days: 14, color: '#FFFF00' },
-      { name: 'Footing & Foundation', percent: 13.1, days: 41, color: '#00FF00' },
-      { name: 'RCC Work - Columns & Slabs', percent: 8.7, days: 17, color: '#000000' },
+      { name: 'Brickwork and Plastering', percent: 1.4, days: 8, color: '#FFC0CB' },
+      { name: 'Flooring & Tiling', percent: 6.3, days: 25, color: '#800080' },
+      { name: 'Electric Wiring', percent: 1.8, days: 14, color: '#FFA500' },
+      { name: 'Water Supply & Plumbing', percent: 1.1, days: 30, color: '#808080' },
+      { name: 'Door', percent: 3.3, days: 15, color: '#A52A2A' },
       { name: 'Roof Slab', percent: 7.3, days: 37, color: '#FF0000' },
-      { name: 'Brickwork and Plastering', percent: 1.4, days: 8, color: '#808080' },
-      { name: 'Flooring & Tiling', percent: 6.3, days: 25, color: '#FF69B4' },
-      { name: 'Electric Wiring', percent: 1.8, days: 14, color: '#800080' },
-      { name: 'Water Supply & Plumbing', percent: 1.1, days: 30, color: '#FFA500' },
-      { name: 'Door', percent: 3.3, days: 15, color: '#404040' }
+      { name: 'RCC Work - Columns & Slabs', percent: 8.7, days: 17, color: '#0000FF' },
+      { name: 'Footing & Foundation', percent: 13.1, days: 41, color: '#000000' },
+      { name: 'Excavation', percent: 1.8, days: 14, color: '#008000' },
+      { name: 'Home Design & Approval', percent: 3.5, days: 46, color: '#FFFF00' }
     ];
 
     // Calculate cumulative start days for Gantt chart
