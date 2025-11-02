@@ -1,131 +1,214 @@
-<div class="profile-container">
-  <!-- Header Section -->
-  <header class="profile-header">
-    <div class="cover-image">
-      <img [src]="profile.coverImage" alt="Cover" />
-    </div>
-    <div class="profile-info">
-      <div class="profile-avatar">
-        <img [src]="profile.image" alt="{{ profile.name }}" />
-      </div>
-      <h1 class="profile-name">{{ profile.name }}</h1>
-      <p class="profile-title">{{ profile.title }}</p>
-    </div>
-  </header>
+<div class="profile-page">
+  <div class="profile-container">
+    <!-- Header Section -->
 
-  <!-- Biography Section -->
-  <section class="biography-section">
-    <div class="bio-item">
-      <span class="bio-label">Eligibility:</span>
-      <span class="bio-value">{{ profile.eligibility }}</span>
-    </div>
-    <div class="bio-item">
-      <span class="bio-label">Portfolio link:</span>
-      <a [href]="'https://' + profile.portfolioLink" class="bio-link" target="_blank">
-        {{ profile.portfolioLink }}
-      </a>
-    </div>
-    <div class="bio-experience">
-      <span class="bio-label">Experience:</span>
-      <span class="bio-value-ex">{{ profile.experience }}</span>
-    </div>
-  </section>
-
-  <!-- Message Button -->
-  <div class="action-section">
-    <button class="message-btn" (click)="sendMessage()">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-      </svg>
-      Message
-    </button>
+<!-- <div class="profile-header">
+  <div>
+    <img [src]="profile.coverImage" alt="Cover">
   </div>
-
-  <!-- Additional Info -->
-  <section class="additional-info">
-    <div class="info-item">
-      <span class="info-label">Professional Field</span>
-      <span class="info-value">{{ profile.title }}</span>
-    </div>
-  
-    <div class="info-item">
-      <span class="info-label">Available service location</span>
-      <div class="skills-list">
-        <span *ngFor="let location of profile.locations" class="locations">{{ location }} </span>
-      </div>
-    </div>
-  </section>
-
-  <!-- About Section -->
-  <section class="about-section">
-    <h2 class="section-title">About</h2>
-    <p class="about-text">{{ profile.about }}</p>
-    <div class="hr-tag">
-      <hr >
-    </div>
-    <div class="contact-info">
-      <span class="contact-title">Contact Information</span>
-      <div class="contact-item">
-        <span class="contact-label">WhatsApp:</span>
-        <a [href]="profile.phone" class="contact-link" target="_blank">{{ profile.phone }}</a>
-      </div>
-      <div class="contact-item">
-        <span class="contact-label">Linkedin:</span>
-        <a [href]="profile.socialLinks.linkedin" class="contact-link" target="_blank">{{ profile.socialLinks.linkedin }}</a>
-      </div>
-    </div>
-    <div class="hr-tag">
-    <hr>
-    </div>
-  </section>
-
-
-
-  <!-- Projects Section -->
-  <section class="projects-section">
-    <h2 class="section-title">Project by {{ profile.name }}</h2>
-    <!-- Message Button -->
-  <div class="action-section-2">
-    <button class="message-btn-2" (click)="sendMessage()">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-      </svg>
-      Message
-    </button>
+  <div>
+    <img [src]="profile.image" alt="Profile">
   </div>
+</div> -->
 
 
-    <div class="projects-grid">
-      <div *ngFor="let project of profile.projects" class="project-card">
-        <div class="project-image">
-          <img [src]="project.image" [alt]="project.title" />
+
+    <!-- phone view -->
+    <div class="phone-view">
+      <header class="profile-header">
+        <div class="cover-image">
+          <img [src]="profile.coverImage" alt="Cover" />
         </div>
-        <div class="project-info">
-          <!-- <h3 class="project-title">{{ project.title }}</h3> -->
-          <p class="project-description">{{ project.description }}</p>
+        <div class="profile-info">
+          <div class="profile-avatar">
+            <img [src]="profile.image" alt="{{ profile.name }}" />
+          </div>
+          <h1 class="profile-name">{{ profile.name }}</h1>
+          <p class="profile-title">{{ profile.title }}</p>
         </div>
+      </header>
+      <div class="profile-details">
+        <!-- Biography Section -->
+        <section class="biography-section">
+          <div class="bio-item">
+            <span class="bio-label">Eligibility:</span>
+            <span class="bio-value">{{ profile.eligibility }}</span>
+          </div>
+          <div class="bio-item">
+            <span class="bio-label">Portfolio link:</span>
+            <a [href]="'https://' + profile.portfolioLink" class="bio-link" target="_blank">
+              {{ profile.portfolioLink }}
+            </a>
+          </div>
+          <div class="bio-experience">
+            <span class="bio-label">Experience:</span>
+            <span class="bio-value-ex">{{ profile.experience }}</span>
+          </div>
+        </section>
+
+        <!-- Message Button -->
+        <div class="action-section">
+          <button class="message-btn" (click)="sendMessage()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+            Message
+          </button>
+        </div>
+
+        <!-- Additional Info -->
+        <section class="additional-info">
+          <div class="info-item">
+            <span class="info-label">Professional Field</span>
+            <span class="info-value">{{ profile.title }}</span>
+          </div>
+
+          <div class="info-item">
+            <span class="info-label">Available service location</span>
+            <div class="skills-list">
+              <span *ngFor="let location of profile.locations" class="locations">{{ location }} </span>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
-  </section>
-  
-  
-  <!-- Reviews Section -->
-  <section class="reviews-section">
-    <div class="hr-tag">
-     <hr >
-   </div>
-    <div class="reviews-header">
-      <h2 class="section-title">Reviews</h2>
-      <button class="sort-btn">
-        <span>Sort by rating</span>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polyline points="6 9 12 15 18 9"></polyline>
-        </svg>
-      </button>
+
+
+    <!-- large device -->
+    <div class="large-device">
+      <div class="profile-container">
+        <header class="profile-header">
+          <div class="cover-image">
+            <img [src]="profile.coverImage" alt="Cover" />
+          </div>
+          <div class="profile-info">
+            <div class="profile-avatar">
+              <img [src]="profile.image" alt="{{ profile.name }}" />
+            </div>
+            <h1 class="profile-name">{{ profile.name }}</h1>
+            <p class="profile-title">{{ profile.title }}</p>
+          </div>
+        </header>
+        <div class="profile-details">
+          <!-- Biography Section -->
+          <section class="biography-section">
+            <div class="bio-item">
+              <span class="bio-label">Eligibility:</span>
+              <span class="bio-value">{{ profile.eligibility }}</span>
+            </div>
+            <div class="bio-item">
+              <span class="bio-label">Portfolio link:</span>
+              <a [href]="'https://' + profile.portfolioLink" class="bio-link" target="_blank">
+                {{ profile.portfolioLink }}
+              </a>
+            </div>
+            <div class="bio-experience">
+              <span class="bio-label">Experience:</span>
+              <span class="bio-value-ex">{{ profile.experience }}</span>
+            </div>
+          </section>
+          <!-- Message Button -->
+          <div class="action-section">
+            <button class="message-btn" (click)="sendMessage()">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+              Message
+            </button>
+          </div>
+        </div>
+
+
+        <!-- Additional Info -->
+        <section class="additional-info">
+          <div class="info-item">
+            <span class="info-label">Professional Field</span>
+            <span class="info-value">{{ profile.title }}</span>
+          </div>
+
+          <div class="info-item">
+            <span class="info-label">Available service location</span>
+            <div class="skills-list">
+              <span *ngFor="let location of profile.locations" class="locations">{{ location }} </span>
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
-    <div class="no-reviews">
+
+
+    <!-- About Section -->
+    <section class="about-section">
+      <h2 class="section-title">About</h2>
+      <p class="about-text">{{ profile.about }}</p>
+      <div class="hr-tag">
+        <hr>
+      </div>
+      <div class="contact-info">
+        <span class="contact-title">Contact Information</span>
+        <div class="contact-item">
+          <span class="contact-label">WhatsApp:</span>
+          <a [href]="profile.phone" class="contact-link" target="_blank">{{ profile.phone }}</a>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">Linkedin:</span>
+          <a [href]="profile.socialLinks.linkedin" class="contact-link" target="_blank">{{ profile.socialLinks.linkedin
+            }}</a>
+        </div>
+      </div>
+      <div class="hr-tag">
+        <hr>
+      </div>
+    </section>
+
+
+
+    <!-- Projects Section -->
+    <section class="projects-section">
+      <h2 class="section-title">Project by {{ profile.name }}</h2>
+      <!-- Message Button -->
+      <div class="action-section-2">
+        <button class="message-btn-2" (click)="sendMessage()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          </svg>
+          Message
+        </button>
+      </div>
+
+
+      <div class="projects-grid">
+        <div *ngFor="let project of profile.projects" class="project-card">
+          <div class="project-image">
+            <img [src]="project.image" [alt]="project.title" />
+          </div>
+          <div class="project-info">
+            <!-- <h3 class="project-title">{{ project.title }}</h3> -->
+            <p class="project-description">{{ project.description }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Reviews Section -->
+    <section class="reviews-section">
+      <div class="hr-tag">
+        <hr>
+      </div>
+      <div class="reviews-header">
+        <h2 class="section-title">Reviews</h2>
+        <button class="sort-btn">
+          <span>Sort by rating</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+      </div>
+      <div class="no-reviews">
         <img src="assets/images/review.png" alt="">
-      <p class="no-reviews-text">No reviews available</p>
-    </div>
-  </section>
+        <p class="no-reviews-text">No reviews available</p>
+      </div>
+    </section>
+  </div>
 </div>
