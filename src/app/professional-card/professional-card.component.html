@@ -1,0 +1,294 @@
+<!-- Professional Card Display Section -->
+<div class="professional-card-page">
+  <!-- Top Advertisement Banner -->
+  <!-- <div class="ad-banner-top">
+    <div class="ad-banner-content">
+      <h2 class="ad-title">ENSURING STANDARDS FOR COLLECTIVE SUCCESS!</h2>
+      <div class="ad-awards">
+        <span>Bangladesh C-Suite Award (2022) (CEO/MD of the Year)</span>
+        <span>Highest VAT Payer Award (2023)</span>
+        <span>Green Champion Award (2024)</span>
+      </div>
+      <div class="ad-companies">
+        <div class="company-logo">MIRPUR CERAMICS</div>
+        <div class="company-logo">KHADIM CERAMICS</div>
+        <div class="company-logo">SUNSHINE BRICKS</div>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- Main Content Area -->
+  <div class="professional-card-main-container">
+    <!-- Left Sidebar - Filters -->
+    <div class="filters-sidebar">
+      <div class="filters-header">
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <line x1="4" y1="6" x2="20" y2="6"></line>
+          <line x1="4" y1="12" x2="20" y2="12"></line>
+          <line x1="4" y1="18" x2="20" y2="18"></line>
+        </svg>
+        <h3>Filters</h3>
+      </div>
+
+      <!-- Professional Category Filter -->
+      <div class="filter-section">
+        <label class="filter-label">Professional Category</label>
+        <div class="category-search">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+          <input type="text" placeholder="Category" class="category-input" (input)="onCategoryChange(($any($event.target).value) || 'any')" />
+        </div>
+        <div class="filter-options">
+          <label class="radio-option">
+            <input type="radio" name="category" value="architect" [checked]="selectedCategory==='architect'" (change)="onCategoryChange('architect')" />
+            <span>Architect</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="category" value="interior-designer" [checked]="selectedCategory==='interior-designer'" (change)="onCategoryChange('interior-designer')" />
+            <span>Interior Designer</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="category" value="structural-engineer" [checked]="selectedCategory==='structural-engineer'" (change)="onCategoryChange('structural-engineer')" />
+            <span>Structural Engineer</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="category" value="electrical-engineer" [checked]="selectedCategory==='electrical-engineer'" (change)="onCategoryChange('electrical-engineer')" />
+            <span>Electrical Engineer</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="category" value="landscape-architect" [checked]="selectedCategory==='landscape-architect'" (change)="onCategoryChange('landscape-architect')" />
+            <span>Landscape Architect</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Rating Filter -->
+      <div class="filter-section">
+        
+        <label class="filter-label">Rating</label>
+        <div class="filter-options">
+          <label class="radio-option">
+            <input type="radio" name="rating" value="any" [checked]="selectedRating==='any'" (change)="onRatingChange('any')" />
+            <span>Any</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="rating" value="5" [checked]="selectedRating===5" (change)="onRatingChange('5')" />
+            <span>★★★★★ Only</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="rating" value="4" [checked]="selectedRating===4" (change)="onRatingChange('4')" />
+            <span>★★★★ and Up</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="rating" value="3" [checked]="selectedRating===3" (change)="onRatingChange('3')" />
+            <span>★★★ and Up</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Content Area -->
+    <div class="professional-card-content">
+      <!-- Mobile Filter Button -->
+      <button class="mobile-filter-btn" (click)="openDrawer()">
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <line x1="4" y1="6" x2="20" y2="6"></line>
+          <line x1="4" y1="12" x2="20" y2="12"></line>
+          <line x1="4" y1="18" x2="20" y2="18"></line>
+        </svg>
+        Filters
+      </button>
+
+      <!-- Search Bar -->
+      <div class="content-search-bar">
+        <input
+          type="text"
+          placeholder="Search by name"
+          class="content-search-input"
+          (input)="onSearchInput($event)"
+        />
+        <svg
+          class="content-search-icon"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.35-4.35"></path>
+        </svg>
+      </div>
+
+      <!-- Professional Cards Grid -->
+      <div class="professional-card-grid">
+        <div class="professional-card-item" *ngFor="let service of filteredServices">
+          <!-- Cover image -->
+          <div
+            class="card-cover"
+            [style.background-image]="
+              service.coverImage
+                ? 'url(' + service.coverImage + ')'
+                : service.image
+                ? 'url(' + service.image + ')'
+                : 'none'
+            "
+          ></div>
+
+          <!-- Avatar overlaps cover -->
+          <div class="avatar-wrapper">
+            <img
+              class="avatar"
+              [src]="service.image || '/assets/images/profile pic.webp'"
+              [alt]="service.name || service.title"
+            />
+          </div>
+
+          <!-- Body -->
+          <div class="card-body">
+            <h3 class="name">{{ service.name || service.title }}</h3>
+            <p class="role">{{ service.title || service.category || 'Professional' }}</p>
+          </div>
+
+          <!-- Footer: rating left, button right -->
+          <div class="card-footer">
+            <div class="rating">
+              <span class="star">★</span>
+              <span class="rating-text">{{ (service.rating || 0).toFixed(1) }} ({{ service.reviewCount || 0 }})</span>
+            </div>
+            <button class="message-btn">
+              Message
+              <span class="icon-box">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Load More Button -->
+      <div class="load-more-container">
+        <button class="load-more-btn">Load more</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Drawer Overlay -->
+  <div
+    class="drawer-overlay"
+    [class.active]="isDrawerOpen"
+    (click)="closeDrawer()"
+  ></div>
+
+  <!-- Mobile Filter Drawer -->
+  <div class="mobile-filter-drawer" [class.open]="isDrawerOpen">
+    <div class="drawer-header">
+      <h3>Filters</h3>
+      <button class="close-btn" (click)="closeDrawer()">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="drawer-content">
+      <!-- Professional Category Filter -->
+      <div class="filter-section">
+        <label class="filter-label">Professional Category</label>
+        <div class="category-search">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+          <input type="text" placeholder="Category" class="category-input" (input)="onCategoryChange(($any($event.target).value) || 'any')" />
+        </div>
+        <div class="filter-options">
+          <label class="radio-option">
+            <input type="radio" name="category-mobile" value="architect" [checked]="selectedCategory==='architect'" (change)="onCategoryChange('architect')" />
+            <span>Architect</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="category-mobile" value="interior-designer" [checked]="selectedCategory==='interior-designer'" (change)="onCategoryChange('interior-designer')" />
+            <span>Interior Designer</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="category-mobile" value="structural-engineer" [checked]="selectedCategory==='structural-engineer'" (change)="onCategoryChange('structural-engineer')" />
+            <span>Structural Engineer</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="category-mobile" value="electrical-engineer" [checked]="selectedCategory==='electrical-engineer'" (change)="onCategoryChange('electrical-engineer')" />
+            <span>Electrical Engineer</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="category-mobile" value="landscape-architect" [checked]="selectedCategory==='landscape-architect'" (change)="onCategoryChange('landscape-architect')" />
+            <span>Landscape Architect</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Rating Filter -->
+      <div class="filter-section">
+        <label class="filter-label">Rating</label>
+        <div class="filter-options">
+          <label class="radio-option">
+            <input type="radio" name="rating-mobile" value="any" [checked]="selectedRating==='any'" (change)="onRatingChange('any')" />
+            <span>Any</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="rating-mobile" value="5" [checked]="selectedRating===5" (change)="onRatingChange('5')" />
+            <span>★★★★★ Only</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="rating-mobile" value="4" [checked]="selectedRating===4" (change)="onRatingChange('4')" />
+            <span>★★★★ and Up</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="rating-mobile" value="3" [checked]="selectedRating===3" (change)="onRatingChange('3')" />
+            <span>★★★ and Up</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

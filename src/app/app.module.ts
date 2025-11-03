@@ -7,16 +7,16 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { CostCalculatorComponent } from './cost-calculator/cost-calculator.component';
-import { ServiceCardComponent } from './service-card/service-card.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ProfessionalCardComponent } from './professional-card/professional-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     CostCalculatorComponent,
-    ServiceCardComponent,
-    ProfileComponent
+    ProfileComponent,
+    ProfessionalCardComponent
   ],
   imports: [
     BrowserModule,

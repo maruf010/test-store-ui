@@ -2,7 +2,12 @@
   min-height: 100vh;
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
   padding: 40px 120px;
+  
+  @media (max-width: 768px) {
+    padding: 40px 20px;
+  }
 }
+
 
 .home-content {
   max-width: 1400px;
@@ -28,6 +33,37 @@
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
+  }
+}
+
+.professionals-btn {
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  &:hover {
+    background: #059669;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 }
 
@@ -85,117 +121,18 @@
   }
 }
 
-.design-switcher {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 40px;
-  background: white;
-  padding: 8px;
-  border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  width: fit-content;
-}
-
-.design-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 20px;
-  background: transparent;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  color: #64748b;
-  font-size: 14px;
-  font-weight: 500;
-
-  svg {
-    color: #94a3b8;
-  }
-
-  &:hover {
-    background: #f1f5f9;
-    color: #334155;
-
-    svg {
-      color: #64748b;
-    }
-  }
-
-  &.active {
-    background: #ff6b35;
-    color: white;
-
-    svg {
-      color: white;
-    }
-  }
-}
-
-.services-grid {
-  display: grid;
-  gap: 24px;
-  animation: fadeIn 0.4s ease;
-
-  &.grid-type1 {
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  }
-
-  &.grid-type2 {
-    grid-template-columns: 1fr;
-    max-width: 1000px;
-  }
-
-  &.grid-type3 {
-    grid-template-columns: 1fr;
-    max-width: 1000px;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
 @media (max-width: 768px) {
   .home-container {
     padding: 40px 20px;
   }
+  
   .header-section {
     flex-direction: column;
     align-items: flex-start;
 
     h1 {
       font-size: 32px;
-    }
-  }
-
-  .design-switcher {
-    width: 100%;
-    justify-content: space-between;
-    overflow-x: auto;
-  }
-
-  .design-btn {
-    flex: 1;
-    justify-content: center;
-    min-width: fit-content;
-
-    span {
-      display: none;
-    }
-  }
-
-  .services-grid {
-    &.grid-type1 {
-      grid-template-columns: 1fr;
     }
   }
 }
